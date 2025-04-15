@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>$m@rTech | Web Design Portfolio</title>
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --accent: #7c3aed;
+      --bg: #f9fafb;
+      --text: #1f2937;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+    }
+
+    section {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      list-style: disc;
+      margin-left: 1.5rem;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .project-card {
+      background-color: white;
+      padding: 1rem;
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .project-card h3 {
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #e5e7eb;
+      margin-top: 3rem;
+    }
+
+    .contact-info p {
+      margin: 0.3rem 0;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    form label {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    form input, form textarea {
+      padding: 0.8rem;
+      margin-top: 0.3rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    form button {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>$m@rTech</h1>
+    <p>Helping Nigerian Businesses Look Great Online</p>
+  </header>
+
+  <section>
+    <h2>About Me</h2>
+    <p>I’m a freelance web designer and developer passionate about building beautiful, affordable websites for small businesses across Nigeria. I work with brands to create websites that look good, work well, and get results.</p>
+  </section>
+
+  <section>
+    <h2>Services</h2>
+    <ul>
+      <li>Website Design (Landing Pages, Business Sites)</li>
+      <li>Responsive & Mobile-Friendly Layouts</li>
+      <li>Branding & UI Suggestions</li>
+      <li>Simple SEO Setup</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="project-card">
+        <h3>Short Wig Vendor</h3>
+        <p>Created a clean, modern landing page that increased customer trust and sales.</p>
+        <a href="#">Live Preview</a>
+      </div>
+      <div class="project-card">
+        <h3>Children’s Day Center</h3>
+        <p>Designed a playful, colorful website for a kid-focused brand in Lagos.</p>
+        <a href="#">Live Preview</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <div class="contact-info">
+      <p>Let’s bring your business online!</p>
+      <p><strong>Email:</strong> you@example.com</p>
+      <p><strong>WhatsApp:</strong> +234 81xxx xxxx</p>
+    </div>
+
+    <form id="contact-form">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Your Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="message">Your Message:</label>
+      <textarea id="message" name="message" required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 $m@rTech. Built with passion and code.</p>
+  </footer>
+
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+      const data = {};
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert('Message sent successfully!');
+      } else {
+        alert('Error: ' + result.error);
+      }
+    });
+  </script>
+
+</body>
+</html>
